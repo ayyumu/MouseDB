@@ -212,6 +212,6 @@ app.use((err, req, res, next) => {
     res.status(condition).render('error', { err });
 });
 
-app.listen(3000, () => {
+app.listen(80, () => {
     console.log('ポート3000でリクエスト待ち受け中...');
 });
