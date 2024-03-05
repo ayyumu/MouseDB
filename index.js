@@ -213,5 +213,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(80, () => {
-    console.log('ポート3000でリクエスト待ち受け中...');
+    console.log('waiting at port 80');
 });

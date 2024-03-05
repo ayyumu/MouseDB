@@ -105,23 +105,24 @@
             src: url("../fonts/Anonymous Pro B.ttf") format("truetype");
         }
 
-        .ui.menu {
+        .ui.secondary.menu {
             /* background-color: #ffffff; */
+            border-bottom: 1px solid #000000;
         }
 
-        .ui.menu .item {
+        .ui.secondary.menu .item {
             font-size: 1.5em;
             align-self: center;
         }
 
-        .ui.menu .item.logo {
+        .ui.secondary.menu .item.logo {
             padding: 0 0.5em 0 0.5em;
             /* margin-top: -0.1em; */
             font-size: 4em;
             font-family: "I-pixel-u", sans-serif;
         }
 
-        .ui.menu .item>img:not(.ui) {
+        .ui.secondary.menu .item>img:not(.ui) {
             display: inline-block;
             vertical-align: middle;
             margin: -0.3em 0.3em;
@@ -210,7 +211,7 @@
 </head>
 
 <body>
-    <div class="ui stackable menu">
+    <div class="ui stackable secondary menu">
         <a class="item logo" href="/">
             MouseDB
             <span style="font-size: x-large; opacity: .5; margin: auto 0 .5rem .5rem;">Beta</span>
