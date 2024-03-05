@@ -2,190 +2,7 @@
 
     <head>
         <title>Hand Fit Results - MouseDB</title>
-        <style>
-            .fitMsg {
-                font-size: 3em;
-            }
-
-            .upper {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-evenly;
-                align-items: start;
-            }
-
-            #leftBottom {
-                display: flex;
-                justify-content: space-between;
-            }
-
-            @media screen and (max-width: 768px) {
-    .upper {
-                display: block;
-            }
-
-            #leftBottom {
-                display: block;
-            }
-            .videoSize {
-                width: 75%;
-            }
-}
-
-            #videos {
-                margin: 3rem auto auto auto;
-            }
-
-            .twitter-tweet {
-                width: 200px !important;
-            }
-
-            .ui.definition.table>thead:not(.full-width)>tr>th:first-child {
-                background: none;
-                box-shadow: none;
-            }
-
-            .ui.definition.table.table {
-                border: none;
-            }
-
-            #firstTh {
-                background-color: var(--bgColor);
-            }
-
-            /* SNS Buttons */
-
-            .sns-share-buttons-title {
-                display: flex;
-                text-align: left;
-            }
-
-            .sns-share-buttons {
-                width: 100%;
-                margin: 1em 1em auto auto;
-                /* text-align: center; */
-                list-style: none;
-                padding-left: 0 !important;
-            }
-
-            .sns-share-buttons li {
-                display: inline-block;
-                width: 43px;
-                height: 43px;
-                margin: 3px;
-                padding: 0 !important;
-                border-radius: 25px;
-                vertical-align: middle;
-                line-height: 1em;
-            }
-
-            .sns-share-buttons li a {
-                font-size: 1.5em;
-                display: block;
-                padding-top: 10px;
-                text-align: center;
-                box-shadow: 2px 2px 8px -2px #aaa;
-                text-decoration: none;
-                color: #fff !important;
-                border-radius: 25px;
-                height: 43px;
-                /*Change to 33 px if vertical outside QooQ*/
-                transition: .3s;
-            }
-
-            .sns-share-buttons li a:hover {
-                text-decoration: none !important;
-                transform: translateY(-3px);
-                cursor: pointer;
-            }
-
-            .amazon {
-                margin: 3rem 0 0rem 0;
-                /* display: grid; */
-                /* place-items: center; */
-            }
-
-            #amazon_btn {
-                width: 43px;
-                height: 43px;
-                font-size: 1.5em;
-                display: block;
-                padding-top: 11px;
-                text-align: center;
-                box-shadow: 2px 2px 8px -2px #aaa;
-                text-decoration: none;
-                color: #000000 !important;
-                border-radius: 25px;
-                transition: .3s;
-                background: rgb(255, 208, 0)
-            }
-
-            #amazon_btn:hover {
-                text-decoration: none !important;
-                transform: translateY(-3px);
-                cursor: pointer;
-            }
-
-            .sns-share-buttons .tweet a {
-                background: rgb(0, 0, 0);
-            }
-
-            .sns-share-buttons .facebook a {
-                background: royalblue;
-            }
-
-            .sns-share-buttons .hatena a {
-                background: dodgerblue;
-            }
-
-            .sns-share-buttons .pocket a {
-                background: coral;
-            }
-
-            .sns-share-buttons .line a {
-                background: limegreen;
-            }
-
-            .sns-share-buttons .pinterest a {
-                background: tomato;
-            }
-
-            .sns-share-buttons .copylink a {
-                font-family: arial;
-                background: plum;
-                font-size: 8px;
-                color: #333 !important;
-            }
-
-            .copylink a::before {
-                font-family: "Font Awesome 5 Free";
-                content: "\f0ea" "\A";
-                font-weight: 900;
-                font-size: 22px;
-                line-height: 1em;
-                color: #fff !important;
-            }
-
-            .sns-share-buttons-title {
-                margin: 2em auto 1em;
-                font-weight: bold;
-                text-align: center;
-            }
-
-            .tableTitle {
-                margin-bottom: 3rem;
-            }
-
-            #rand {
-                font-size: 0.1px;
-            }
-
-            /* .hidden-text {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            } */
-        </style>
+        <link rel="stylesheet" href="css/results.css">
         <script src="javascripts/ResultsTable.js"></script>
     </head>
     <h1 class="ui header grid">
@@ -202,12 +19,12 @@
                     <thead>
                         <tr>
                             <th id="firstTh"></th>
-                            <th>Length(mm)</th>
-                            <th>Width(mm)</th>
+                            <th>Length (mm)</th>
+                            <th>Width (mm)</th>
                             <% if(!isNaN(desiZ)){ %>
                             <th>Height(mm)</th>
                             <% } %>
-                            <th>Total Difference</th>
+                            <th>Total Difference (mm)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -480,50 +297,7 @@
             </table>
         </div>
     </div>
-    <script>
-        function popup1() {
-            var w = 550, h = 550;
-            window.open("https://twitter.com/intent/tweet?url=" + encodeURIComponent(location.href) + "&text=" + "<%= mouses[0].creator %> <%= mouses[0].name %> is the mouse fits my hand!");
-        }
-
-        function popup2() {
-            var w = 550, h = 420;
-            window.open("https://www.facebook.com/sharer.php?u=" + encodeURIComponent(location.href));
-        }
-
-        function popup4() {
-            var w = 550, h = 420;
-            window.open("https://getpocket.com/edit?url=" + encodeURIComponent(location.href));
-        }
-
-        function popup5() {
-            var w = 550, h = 420;
-            window.open("https://social-plugins.line.me/lineit/share?url=" + encodeURIComponent(location.href));
-        }
-
-        //amazon
-        // function popup9() {
-        //     var w = 550, h = 420;
-        //     window.open();
-        // }
-    </script>
+    <script src="javascripts/results.js"></script>
 
     <!-- Clipboard.js -->
     <script src='//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js'></script>
-
-            <script>
-                // coppying
-                const clipboard = new ClipboardJS(".copy_btn");
-                window.addEventListener('DOMContentLoaded', function () {
-                    $(".copy_btn").click(function () {
-                        $(this).attr("data-clipboard-text", document.title + " " + location.href).css("cursor", "text").css("transform", "none").text("COPIED").attr("title", "コピーしました");
-                    });
-                    // const tweet = document.querySelectorAll('.twitter-tweet');
-                    // tweet.setAttribute('data-width', "300");
-                });
-            </script>
-
-            <!-- <% if(Math.random()<0.5){ %>
-            <div style="  position: absolute; top: -9999px;left: -9999px;">.<%= Math.trunc(Math.random() * 100) %>
-            </div>
-            <% } %> -->

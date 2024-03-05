@@ -1,0 +1,105 @@
+.handleRight {
+    position: absolute;
+    background-color: #ff0000;
+    width: 3px;
+    height: 100%;
+    cursor: ew-resize;
+    bottom: 3px;
+    left: 1px;
+    z-index: 1;
+}
+
+.handleBottom {
+    position: absolute;
+    background-color: #ff0000;
+    width: 100%;
+    height: 3px;
+    cursor: ns-resize;
+    bottom: 3px;
+    right: -1px;
+    z-index: 1;
+}
+
+.handleRight::after {
+    content: '↔';
+    font-size: 3em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-48%, -50%);
+    color: #ff0000;
+}
+
+.handleBottom::after {
+    content: '↕';
+    font-size: 3em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-100%, -65%);
+    color: #ff0000;
+}
+
+.page {
+    margin-top: 5vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.handContainer {}
+
+.handSelf {
+    position: relative;
+    width: fit-content;
+    /* element size = picutre size */
+}
+
+.fitImg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.ui.big.segment,
+.ui.big.segments .segment {
+    margin: 0 auto 0 10vw;
+    font-size: 1.28571429rem;
+}
+
+@media (orientation: portrait) {
+    .handSelf {
+        margin-right: 0;
+    }
+
+    .inputs {
+        margin-left: 0;
+    }
+
+}
+
+@media (orientation: landscape) {
+    .handSelf {
+        margin-right: 200px;
+    }
+
+    .inputs {
+        margin-left: 200px;
+    }
+}
+
+body {
+    height: 200%;
+}
+
+#searchBtn {
+    margin-left: 1vw;
+}
+
+.popup {
+    max-height: 100vh;
+}
+
+#credit {
+    position: absolute;
+    bottom: -20em;
+}

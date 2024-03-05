@@ -168,3 +168,8 @@ result table 4x5
                         <td>
                             <%= m.color %>
                         </td>
+
+<!-- <% if(Math.random()<0.5){ %>
+            <div style="  position: absolute; top: -9999px;left: -9999px;">.<%= Math.trunc(Math.random() * 100) %>
+            </div>
+            <% } %> -->                    
