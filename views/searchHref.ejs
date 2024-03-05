@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoComplete with EJS and Mongoose</title>
+</head>
+<body style="background-color: #55c470;">
+    <h1>AutoComplete Example</h1>
+    
+    <input type="text" id="searchBox" oninput="searchHref()" placeholder="Search...">
+    <ul id="suggestions"></ul>
+
+    <script>
+        document.addEventListener('click', function(event) {
+            var suggestionsList = document.getElementById('suggestions');
+            var searchBox = document.getElementById('searchBox');
+            
+            // リストが表示されており、クリックされたエレメントが入力エリアやリスト以外の場合はリストを非表示にする
+            if (suggestionsList.style.display !== 'none' && !searchBox.contains(event.target) && event.target !== suggestionsList) {
+                suggestionsList.style.display = 'none';
+            }else{
+                suggestionsList.style.display = 'block';
+            }
+        });
+
+        function searchHref() {
+            var input = document.getElementById('searchBox').value;
+            fetch(`/completeHref?input=${input}`)
+                .then(response => response.json())
+                .then(data => {
+                    var suggestionsList = document.getElementById('suggestions');
+                    suggestionsList.innerHTML = '';
+                    for(var i = 0; i<10; i++){
+                        var li = document.createElement('li');
+                        var a = document.createElement('a');
+                        a.href = `mouses/${data[i].creator}/${data[i].name}`; // デフォルトのリンク先を無効にする
+                        a.textContent = data[i].creator + ' ' + data[i].name; // Assuming 'name' field from the database
+                        a.onclick = function() {
+                            handleItemClick(data[i]);
+                            return false;
+                        };
+                        li.appendChild(a);
+                        suggestionsList.appendChild(li);
+                    }
+                    suggestionsList.style.display = 'block'; // リストを表示する
+                });
+        }
+
+        function handleItemClick(item) {
+            console.log('Item clicked:', item);
+        }
+    </script>
+
+</body>
+</html>

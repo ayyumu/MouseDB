@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= mouse.name %>
+    </title>
+</head>
+
+<body>
+    <div id="videos">
+        <% if(items){ %>
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= items[0].id.videoId %>" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <% } %>
+    </div>
+    <h1>
+        <%= mouse.name %>
+    </h1>
+
+    <table id="example" class="display nowrap inverted teal ui striped" width="100%">
+        <thead>
+            <tr>
+                <th>creator</th>
+                <th>name</th>
+                <th>weight</th>
+                <th>length</th>
+                <th>width</th>
+                <th>height</th>
+                <th>shape</th>
+                <th>connection</th>
+                <th>sensor</th>
+                <th>pollRate</th>
+                <th>dpi</th>
+                <th>surface</th>
+                <th>btnNum</th>
+                <th>mainSw</th>
+                <th>trackSpd</th>
+                <th>accel</th>
+                <th>keyRes</th>
+                <th>minLod</th>
+                <th>maxLod</th>
+                <th>battery</th>
+                <th>isRound</th>
+                <th>led</th>
+                <th>battery</th>
+                <th>date</th>
+                <th>material</th>
+                <th>country</th>
+                <th>color</th>
+            </tr>
+        </thead>
+
+        <tbody>
+                <tr>
+                    <td>
+                        <%= mouse.creator %>
+                    </td>
+                    <td>
+                        <a href="/mouses/<%= mouse.creator %>/<%= mouse.name %>">
+                            <%= mouse.name %>
+                        </a>
+                    </td>
+                    <td>
+                        <%= mouse.weight %>
+                    </td>
+                    <td>
+                        <%= mouse.length %>
+                    </td>
+                    <td>
+                        <%= mouse.width %>
+                    </td>
+                    <td>
+                        <%= mouse.height %>
+                    </td>
+                    <td>
+                        <%= mouse.shape %>
+                    </td>
+                    <td>
+                        <%= mouse.connection %>
+                    </td>
+                    <td>
+                        <%= mouse.sensor %>
+                    </td>
+                    <td>
+                        <%= mouse.pollRate %>
+                    </td>
+                    <td>
+                        <%= mouse.dpi %>
+                    </td>
+                    <td>
+                        <%= mouse.surface %>
+                    </td>
+                    <td>
+                        <%= mouse.btnNum %>
+                    </td>
+                    <td>
+                        <%= mouse.mainSw %>
+                    </td>
+                    <td>
+                        <%= mouse.trackSpd %>
+                    </td>
+                    <td>
+                        <%= mouse.accel %>
+                    </td>
+                    <td>
+                        <%= mouse.keyRes %>
+                    </td>
+                    <td>
+                        <%= mouse.minLod %>
+                    </td>
+                    <td>
+                        <%= mouse.maxLod %>
+                    </td>
+                    <td>
+                        <%= mouse.battery %>
+                    </td>
+                    <td>
+                        <%= mouse.isRound %>
+                    </td>
+                    <td>
+                        <%= mouse.led %>
+                    </td>
+                    <td>
+                        <%= mouse.battery %>
+                    </td>
+                    <td>
+                        <%= mouse.date %>
+                    </td>
+                    <td>
+                        <%= mouse.material %>
+                    </td>
+                    <td>
+                        <%= mouse.country %>
+                    </td>
+                    <td>
+                        <%= mouse.color %>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+
+    <a href="/mouses/">一覧に戻る</a>
+    <a href="/mouses/<%= mouse.creator %>/<%= mouse.name %>/edit">編集</a>
+    <form action="/mouses/<%= mouse.creator %>/<%= mouse.name %>?_method=DELETE" method="POST">
+        <button>削除</button>
+    </form>
+</body>
+
+</html>

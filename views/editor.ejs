@@ -1,0 +1,174 @@
+<%- layout('layouts/common.ejs') %>
+<head>
+<title>Mouse Database</title>
+<style>
+    td i:hover {
+  cursor: pointer;
+}
+body{
+    background-color: rgb(255, 255, 255);
+}
+</style>
+</head>
+    <h1>EDITOR</h1>
+    <div class="container ui segment no-border">
+        <a href="/mouses/new" class="ui teal tag label massive" style="margin-bottom: 2rem;">add new item</a>
+        <table id="example" class="display nowrap inverted ui striped" width="100%">
+            <thead>
+                <tr>
+                    <th>delete</th>
+                    <th>creator</th>
+                    <th>name</th>
+                    <th>weight</th>
+                    <th>length</th>
+                    <th>width</th>
+                    <th>height</th>
+                    <th>shape</th>
+                    <th>connection</th>
+                    <th>sensor</th>
+                    <th>pollRate</th>
+                    <th>dpi</th>
+                    <th>surface</th>
+                    <th>btnNum</th>
+                    <th>isRound</th>
+                    <th>trackSpd</th>
+                    <th>accel</th>
+                    <th>mainSw</th>
+                    <th>keyRes</th>
+                    <th>minLod</th>
+                    <th>maxLod</th>
+                    <th>led</th>
+                    <th>battery</th>
+                    <th>date</th>
+                    <th>material</th>
+                    <th>country</th>
+                    <th>color</th>
+                    <th>amzn</th>
+                    <th>tweet</th>
+                    <th>clickForce</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% mouses.forEach(m=> { %>
+                    <tr>
+                        <td>
+                            <form action="/mouses/<%= m._id %>?_method=DELETE" method="POST">
+                                <button>delete</button>
+                            </form></td>
+                        <td>
+                            <%= m.creator %>
+                        </td>
+                        <td>
+                            <a href="/mouses/<%= m._id %>/edit" style="color: #91ff00;">
+                                <%= m.name %>
+                            </a>
+                            <a href=<%= m.originalURL %>>
+                                <button style="margin-left: 10px;">URL</button>
+                            </a>
+                            <a href="/mouses/<%= m._id %>/dup">
+                                <button>Dup</button>
+                            </a>
+                        </td>
+                        <td>
+                            <%= m.weight %>
+                        </td>
+                        <td>
+                            <%= m.length %>
+                        </td>
+                        <td>
+                            <%= m.width %>
+                        </td>
+                        <td>
+                            <%= m.height %>
+                        </td>
+                        <td>
+                            <%= m.shape %>
+                        </td>
+                        <td>
+                            <%= m.connection %>
+                        </td>
+                        <td>
+                            <%= m.sensor %>
+                        </td>
+                        <td>
+                            <%= m.pollRate %>
+                        </td>
+                        <td>
+                            <%= m.dpi %>
+                        </td>
+                        <td>
+                            <%= m.surface %>
+                        </td>
+                        <td>
+                            <%= m.btnNum %>
+                        </td>
+                        <td>
+                            <%= m.isRound %>
+                        </td>
+                        <td>
+                            <%= m.trackSpd %>
+                        </td>
+                        <td>
+                            <%= m.accel %>
+                        </td>
+
+                        <td>
+                            <%= m.mainSw %>
+                        </td>
+                        <td>
+                            <%= m.keyRes %>
+                        </td>
+                        <td>
+                            <%= m.minLod %>
+                        </td>
+                        <td>
+                            <%= m.maxLod %>
+                        </td>
+                        <td>
+                            <%= m.led %>
+                        </td>
+                        <td>
+                            <%= m.battery %>
+                        </td>
+                        <td>
+                            <%= m.date %>
+                        </td>
+                        <td>
+                            <%= m.material %>
+                        </td>
+                        <td>
+                            <%= m.country %>
+                        </td>
+                        <td>
+                            <%= m.color %>
+                        </td>
+                        <% if(m.amzn){ %>
+                            <td><i class="fab fa-amazon" onclick="openLink('<%= m.amzn %>')"></i></td>
+                       <% }else{ %>
+                            <td></td>
+                       <% } %>
+
+                       <% if(m.tweet){ %>
+                            <td><i class="fab fa-twitter" onclick="openLink('<%= m.tweet %>')"></i></td>
+                       <% }else{ %>
+                            <td></td>
+                       <% } %>
+                        <td>
+                            <%= m.clickForce %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="javascripts/DBTable.js"></script>
+
+     <script>
+    // 新しいタブでリンクを開く関数
+    function openLink(url) {
+        window.open(url, '_blank');
+    }
+    </script>
+

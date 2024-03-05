@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- semantic ui -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.css" rel="stylesheet"
+        type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.js"></script>
+    <style>
+        input{
+            margin: .3rem;
+        }
+        .ui.grid>* {
+    padding-left: 5rem;
+    padding-right: 1rem;
+    font-size: 1.3rem;
+}
+    </style>
+    <title>add new item</title>
+</head>
+
+<body>
+    <h1>add new item</h1>
+    <div  class="ui grid segment inverted">
+    <form action="/mouses" method="POST">
+        <label for="creator">creator</label>
+        <input type="text" name="creator" placeholder="creator">
+        <label for="name">name</label>
+        <input type="text" name="name" placeholder="item name">
+
+        <br>
+        <label for="weight">weight</label>
+        <input type="number" name="weight" placeholder="weight" step="0.01">
+
+        <br>
+        <label for="length">length</label>
+        <input type="number" name="length" placeholder="length" step="0.01">
+        <label for="width">width</label>
+        <input type="number" name="width" placeholder="width" step="0.01">
+
+        <br>
+        <label for="height">height</label>
+        <input type="number" name="height" placeholder="height" step="0.01">
+        <label for="shape">shape</label>
+        <select name="shape" id="">
+            <option value="symmetrical">symmetrical</option>
+            <option value="ergonomic">ergonomic</option>
+        </select>
+
+        <br>
+        <label for="connection">connection</label>
+        <select name="connection" id="">
+            <option value="Vinyl Cable">Vinyl Cable</option>
+            <option value="Paracord">Paracord</option>
+            <option value="wired">wired</option>
+            <option value="wireless">wireless</option>
+        </select>
+        <label for="sensor">sensor</label>
+        <input type="text" name="sensor" placeholder="sensor">
+
+        <br>
+        <label for="pollRate">pollRate</label>
+        <input type="text" name="pollRate" placeholder="pollRate">
+        <label for="dpi">dpi</label>
+        <input type="number" name="dpi" placeholder="dpi">
+
+        <br>
+        <label for="btnNum">btnNum</label>
+        <input type="text" name="btnNum" placeholder="btnNum">
+        <label for="isRound">isRound</label>
+        <select name="isRound" id="">
+            <option value="true">true</option>
+            <option value="false">false</option>
+        </select>
+
+        <br>
+        <label for="surface">surface</label>
+        <select name="surface" id="">
+            <option value="Matte">Matte</option>
+            <option value="Glossy">Glossy</option>
+            <option value="Honeycomb">Honeycomb</option>
+        </select>
+
+        <br>
+        <label for="originalURL">originalURL</label>
+        <input type="text" name="originalURL" placeholder="originalURL">
+        <label for="accel">accel</label>
+        <input type="number" name="accel" placeholder="accel">
+
+        <br>
+        <label for="trackSpd">trackSpd</label>
+        <input type="text" name="trackSpd" placeholder="trackSpd">
+        <label for="keyRes">keyRes</label>
+        <input type="text" name="keyRes" placeholder="keyRes" step="0.01">
+
+        <br>
+        <label for="mainSw">mainSw</label>
+        <input type="text" name="mainSw" placeholder="mainSw">
+
+        <br>
+        <label for="minLod">minLod</label>
+        <input type="number" name="minLod" placeholder="minLod" step="0.01">
+        <label for="maxLod">maxLod</label>
+        <input type="number" name="maxLod" placeholder="maxLod" step="0.01">
+
+        <br>
+        <label for="led">led</label>
+        <!-- <select name="led" id="">
+            <option value="true">true</option>
+            <option value="false">false</option>
+        </select> -->
+
+        <br>
+        <label for="clickForce">battery</label>
+        <input type="number" name="battery" placeholder="battery">
+
+        <br>
+        <label for="date">date</label>
+        <input type="text" name="date" placeholder="date">
+        <label for="material">material</label>
+        <input type="text" name="material" placeholder="material">
+
+        <br>
+        <label for="country">country</label>
+        <input type="text" name="country" placeholder="country">
+        <div id="colorContainer">
+            <label for="color">color:</label>
+            <input type="text" name="color[]">
+        </div>
+        <button type="button" onclick="addcolorField()">Add color</button>
+
+        <br>
+        <label for="clickForce">clickForce</label>
+        <input type="number" name="clickForce" placeholder="clickForce">
+
+        <br>
+        <label for="amzn">amzn</label>
+        <input type="text" name="amzn" placeholder="amzn">
+        <label for="tweet">tweet</label>
+        <input type="text" name="tweet" placeholder="tweet">
+        
+
+
+        <style>
+            .tarea {
+                display: inline-block;
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #999;
+                box-sizing: border-box;
+                background: #f2f2f2;
+                margin: 0.5em 0;
+                line-height: 1.5;
+                height: 6em;
+            }
+        </style>
+        <label for="description">description</label>
+        <input type="text" name="description" placeholder="description" class="tarea">
+        <button>submit</button>
+    </form>
+    </div>
+
+    <script>
+    function addcolorField() {
+        const container = document.getElementById('colorContainer');
+        const newColorField = document.createElement('div');
+        newColorField.innerHTML = `
+            <label for="color">color:</label>
+            <input type="text" name="color[]">
+        `;
+        container.appendChild(newColorField);
+    }
+    </script>
+</body>
+
+</html>

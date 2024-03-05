@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoComplete with EJS and Mongoose</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" />
+    <style>
+        li {
+            list-style-type: none;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body style="background-color: #ebe26d;">
+    <h1>AutoComplete Example</h1>
+    <input type="text" id="creatorInp" oninput="creatorSearch()" placeholder="Search...">
+    <ul id="suggestions"></ul>
+
+    <script>
+        document.addEventListener('click', function (event) {
+            var suggestionsList = document.getElementById('suggestions');
+            var creatorInp = document.getElementById('creatorInp');
+
+            // リストが表示されており、クリックされたエレメントが入力エリアやリスト以外の場合はリストを非表示にする
+            if (suggestionsList.style.display !== 'none' && !creatorInp.contains(event.target) && event.target !== suggestionsList) {
+                suggestionsList.style.display = 'none';
+            }else if(creatorInp.contains(event.target)){
+                suggestionsList.style.display = 'block';
+            }
+        });
+
+        function creatorSearch() {
+            var input = document.getElementById('creatorInp').value;
+            fetch(`/completeFill?input=${input}`)
+                .then(response => response.json())
+                .then(data => {
+                    var suggestionsList = document.getElementById('suggestions');
+                    suggestionsList.innerHTML = '';
+                    var displayedCount = 0;
+                    var displayedTexts = [];
+                    for (var i = 0; i < data.length && displayedCount < 10; i++) {
+                        var item = data[i];
+                        // 既に表示されたテキストでない場合にのみ追加
+                        if (!displayedTexts.includes(item.creator)) {
+                            var li = document.createElement('li');
+                            li.textContent = item.creator;
+                            li.onclick = function () {
+                                handleItemClick(item);
+                                return false;
+                            };
+                            suggestionsList.appendChild(li);
+                            displayedTexts.push(item.creator);
+                            displayedCount++;
+                        }
+                    }
+                    suggestionsList.style.display = 'block';
+                });
+        }
+
+        function handleItemClick(item) {
+            var selectedItemInput = document.getElementById('creatorInp');
+            selectedItemInput.value = item.creator; // Assuming 'name' field from the database
+        }
+    </script>
+
+</body>
+
+</html>

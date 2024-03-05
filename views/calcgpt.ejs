@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semantic UI Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <style>
+    .large-input {
+      font-size: 1.2em;
+    }
+    .attention {
+      border: 2px solid red;
+      padding: 10px;
+      margin-top: 20px;
+    }
+    .info-icon {
+      margin-left: 5px;
+      cursor: pointer;
+    }
+    .info-content {
+      display: none;
+      position: absolute;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      z-index: 1;
+    }
+    .label:hover .info-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="ui grid">
+    <div class="five wide column">
+      <div class="ui form">
+        <div class="field">
+          <label>Label 1 <i class="info icon info-icon"></i></label>
+          <input type="text" class="large-input">
+          <div class="info-content">Information about Label 1</div>
+        </div>
+        <!-- Repeat for Label 2 - 5 -->
+        <!-- 注意書き -->
+        <div class="attention">注意: このフォームは重要な情報を含みます。</div>
+      </div>
+    </div>
+    <div class="eleven wide column">
+      <img src="your-image.jpg" alt="Image" class="ui image">
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.info-icon').popup({
+        on: 'hover'
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<%- layout('layouts/common.ejs') %>
+
+    <head>
+        <title>Hand Fit - MouseDB</title>
+        <style>
+            .handleRight {
+                position: absolute;
+                background-color: #ff0000;
+                width: 3px;
+                height: 100%;
+                cursor: ew-resize;
+                bottom: 3px;
+                left: 1px;
+                z-index: 1;
+            }
+
+            .handleBottom {
+                position: absolute;
+                background-color: #ff0000;
+                width: 100%;
+                height: 3px;
+                cursor: ns-resize;
+                bottom: 3px;
+                right: -1px;
+                z-index: 1;
+            }
+
+            .handleRight::after {
+                content: '↔';
+                font-size: 3em;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-48%, -50%);
+                color: #ff0000;
+            }
+
+            .handleBottom::after {
+                content: '↕';
+                font-size: 3em;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-100%, -65%);
+                color: #ff0000;
+            }
+
+            .page {
+                margin-top: 5vh;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+            }
+
+            .handContainer {}
+
+            .handSelf {
+                position: relative;
+                width: fit-content;
+                /* element size = picutre size */
+            }
+
+            .fitImg {
+                max-width: 100%;
+                max-height: 100%;
+            }
+
+            .ui.big.segment,
+            .ui.big.segments .segment {
+                margin: 0 auto 0 10vw;
+                font-size: 1.28571429rem;
+            }
+
+            @media (orientation: portrait) {
+                .handSelf {
+                    margin-right: 0;
+                }
+
+                .inputs {
+                    margin-left: 0;
+                }
+
+            }
+
+            @media (orientation: landscape) {
+                .handSelf {
+                    margin-right: 200px;
+                }
+
+                .inputs {
+                    margin-left: 200px;
+                }
+            }
+
+            body {
+                height: 200%;
+            }
+
+            #searchBtn {
+                margin-left: 1vw;
+            }
+
+            .popup {
+                max-height: 100vh;
+            }
+
+            #credit{
+                position: absolute;
+                bottom: -20em;
+            }
+        </style>
+    </head>
+    <h1 class="ui header grid">
+        Hand Fit
+        <div class="sub header" style=" font-size: medium;">
+            Search ideal mice based on your hand size
+        </div>
+    </h1>
+    <div class="page ui stackable">
+        <div class="inputs ui segment no-border big">
+            <form id="desiMouse">
+                <p>Your Hand Size (mm)</p>
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        X
+                    </div>
+                    <input type="number" id="horizontalRatio" name="handW" step="0.1">
+                </div>
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        Y
+                    </div>
+                    <input type="number" id="verticalRatio" name="handL" step="0.1">
+                </div>
+                <br><br><br>
+
+                <div>Ratio of Mouse Size
+                    <i class="ui info circle icon info-icon" data-content="The mouse's ratio to hand size. Feel free to adjust this value. While it may seem a bit
+                            small, 0.6 is considered optimal. For beginners, around 0.63 is recommended." data-variation="large very wide"></i>
+                </div>
+                <br>
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        X
+                    </div>
+                    <input type="number" id="coefX" name="coefX" step="0.01" value="0.6">
+                </div>
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        Y
+                    </div>
+                    <input type="number" id="coefY" name="coefY" step="0.01" value="0.6">
+                </div>
+                <br><br><br>
+
+                <div class="ui icon">Desired Mouse Size (mm)
+                    <i class="info circle icon info-icon" data-variation="large very wide basic"
+                        data-position="right center"></i>
+                    <div class="ui popup transition hidden">
+                        <div class="content">
+                            <p class="infoData">Type max width, length, height of the Mouse</p>
+                            <img src="images/mouseSize.png" class="infoData" alt="Sample Image"
+                                style="height: 75%; width: 75%;">
+                            <img src="images/mouseZ.png" class="infoData" alt="Sample Image"
+                                style="height: 100%; width: 100%;">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        X
+                    </div>
+                    <input type="number" id="desiX" name="desiX" step="0.1">
+                </div>
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        Y
+                    </div>
+                    <input type="number" id="desiY" name="desiY" step="0.1">
+                </div>
+                <div class="ui labeled input">
+                    <div class="ui label">
+                        Z
+                    </div>
+                    <input type="number" id="desiZ" name="desiZ" step="0.1" placeholder="Height (Optional)">
+                </div>
+                <br><br>
+                <button class="huge ui button" id="searchBtn">Search</button>
+            </form>
+            <br>
+
+
+            <div class="ui negative message compact">
+                <p>You can measure your hand size by using the picture on the right, but use <br> your own measuring
+                    tool for accurate measurements.</p>
+            </div>
+            <br>
+            <div class="ui labeled input">
+                    <div class="ui label">
+                        Monitor Inch
+                    </div>
+                    <input type="number" id="monitorInch" step="0.1">
+                </div>
+            <!-- <br><br>
+            <label for="resX">Monitor Resolution (p) X:</label>
+            <input type="number" id="resX"> Y: <input type="number" id="resY">
+            <br> -->
+            <!-- <label for="aspectX">Aspect Ratio:</label>
+        <input type="number" id="aspectX" value="16"> : <input type="number" id="aspectY" value="9"> -->
+
+        </div>
+
+        <div class="handContainer">
+            <div class="handSelf">
+
+                <div class="handleRight"></div>
+                <img class="fitImg" src="images/hand_with_arrow.png" alt="Sample Image"
+                    style="height: 660px; width: 355px;">
+                <div class="handleBottom"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const handContainer = document.querySelector('.handContainer');
+        const image = document.querySelector('.fitImg');
+        const handleRight = document.querySelector('.handleRight');
+        const handleBottom = document.querySelector('.handleBottom');
+        const horizontalRatioInput = document.getElementById('horizontalRatio');
+        const verticalRatioInput = document.getElementById('verticalRatio');
+        const desiXInput = document.getElementById('desiX');
+        const desiYInput = document.getElementById('desiY');
+        const desiZInput = document.getElementById('desiZ');
+        const coefXInput = document.getElementById('coefX');
+        const coefYInput = document.getElementById('coefY');
+        const defaultPxH = 660;
+        const defaultPxW = 355;
+
+        let monitorInch = 24.5;
+        let monitorResX = window.screen.width; //ascpect = needless
+        let monitorResY = window.screen.height;
+        let defaultHandH = 185; //initial
+        let defaultHandW = 100;
+        let deformX = defaultHandW; // store delta
+        let deformY = defaultHandH;
+        let zoom;
+
+        function monitorDetect() {
+            if (monitorResX > monitorResY) {
+                zoom = monitorResX / 1920;
+                document.body.style.zoom = zoom;
+                defaultHandH *= (monitorInch / 24.5);
+                defaultHandW *= (monitorInch / 24.5);
+            } else {
+                zoom = monitorResY / 1920;
+                document.body.style.zoom = zoom;
+                defaultHandH *= (monitorInch / 24.5);
+                defaultHandW *= (monitorInch / 24.5);
+            }
+            horizontalRatioInput.value = Math.trunc(defaultHandW * 10) / 10;
+            verticalRatioInput.value = Math.trunc(defaultHandH * 10) / 10;
+            calcdesired();
+        }
+
+        function calcdesired() {
+            desiXInput.value = Math.trunc(horizontalRatioInput.value * coefXInput.value * 10) / 10;
+            desiYInput.value = Math.trunc(verticalRatioInput.value * coefYInput.value * 10) / 10;
+        }
+
+        monitorDetect();
+
+        const inchInp = document.getElementById('monitorInch');
+        inchInp.value = monitorInch;
+        inchInp.addEventListener('input', function () {
+            monitorInch = inchInp.value;
+            console.log(monitorInch);
+            horizontalRatioInput.value = Math.trunc(deformX * 10 * monitorInch / 24.5) / 10;
+            verticalRatioInput.value = Math.trunc(deformY * 10 * monitorInch / 24.5) / 10;
+            calcdesired();
+        });
+        // const resXInp = document.getElementById('resX');
+        // resXInp.value = monitorResX;
+        // resXInp.addEventListener('input', function () {
+        //     monitorResX = resXInp.value;
+        //     calcHandSize();
+        // });
+        // const resYInp = document.getElementById('resY');
+        // resYInp.value = monitorResY;
+        // resYInp.addEventListener('input', function () {
+        //     monitorResY = resYInp.value;
+        //     calcHandSize();
+        // });
+        horizontalRatioInput.addEventListener('input', function () {
+            calcdesired();
+        });
+        verticalRatioInput.addEventListener('input', function () {
+            calcdesired();
+        });
+        coefXInput.addEventListener('input', function () {
+            calcdesired();
+        });
+        coefYInput.addEventListener('input', function () {
+            calcdesired();
+        });
+
+        let startWidth, startHeight, startX, startY, storeX, storeY;
+
+        handleRight.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            startWidth = image.clientWidth;
+            startX = e.clientX;
+            document.addEventListener('mousemove', resizeWidth);
+            document.addEventListener('mouseup', stopResizeWidth);
+        });
+
+        handleBottom.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            startHeight = image.clientHeight;
+            startY = e.clientY;
+            document.addEventListener('mousemove', resizeHeight);
+            document.addEventListener('mouseup', stopResizeHeight);
+        });
+
+        function resizeWidth(e) {
+            const width = startWidth - e.clientX + startX;
+            // const horizontalRatio = width / startWidth;
+            image.style.width = width + 'px';
+            deformX = defaultHandW * (image.clientWidth / defaultPxW);
+            horizontalRatioInput.value = Math.trunc(deformX * 10) / 10;
+            desiXInput.value = Math.trunc(deformX * coefXInput.value * 10) / 10;
+        }
+
+        function stopResizeWidth() {
+            document.removeEventListener('mousemove', resizeWidth);
+        }
+
+        function resizeHeight(e) {
+            const height = startHeight + e.clientY - startY;
+            // const verticalRatio = height / startHeight;
+            image.style.height = height + 'px';
+            deformY = defaultHandH * (image.clientHeight / defaultPxH)
+            verticalRatioInput.value = Math.trunc(deformY * 10) / 10;
+            desiYInput.value = Math.trunc(deformY * coefYInput.value * 10) / 10;
+        }
+
+        function stopResizeHeight() {
+            document.removeEventListener('mousemove', resizeHeight);
+        }
+
+        document.getElementById('desiMouse').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const url = `/desiMouse?desiX=${desiXInput.value}&desiY=${desiYInput.value}&desiZ=${desiZInput.value || 'null'}`
+            window.location.href = url;
+        });
+
+    </script>
+    <% if(darkMode) { %>
+        <script src="javascripts/darkModeSession.js"></script>
+        <% } %>

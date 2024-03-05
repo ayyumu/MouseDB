@@ -1,0 +1,35 @@
+/* styles.css */
+
+th.sortable {
+    cursor: pointer;
+    position: relative;
+}
+
+th.sortable::after {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #000;
+    /* デフォルトの矢印色 */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    /* 右側に余白を設定 */
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+    /* アニメーションを追加 */
+}
+
+/* ソートされた状態の矢印スタイル */
+th.sorted-asc::after {
+    transform: translateY(-50%) rotate(180deg);
+    /* 矢印を上向きに回転 */
+}
+
+th.sorted-desc::after {
+    transform: translateY(-50%);
+    /* 矢印を下向きに変更しない */
+}

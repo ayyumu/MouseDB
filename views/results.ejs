@@ -1,0 +1,533 @@
+<%- layout('layouts/common.ejs') %>
+
+    <head>
+        <title>Hand Fit Results - MouseDB</title>
+        <style>
+            .fitMsg {
+                font-size: 3em;
+            }
+
+            .upper {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                align-items: start;
+            }
+
+            #leftBottom {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            @media screen and (max-width: 768px) {
+    .upper {
+                display: block;
+            }
+
+            #leftBottom {
+                display: block;
+            }
+            .videoSize {
+                width: 75%;
+            }
+}
+
+            #videos {
+                margin: 3rem auto auto auto;
+            }
+
+            .twitter-tweet {
+                width: 200px !important;
+            }
+
+            .ui.definition.table>thead:not(.full-width)>tr>th:first-child {
+                background: none;
+                box-shadow: none;
+            }
+
+            .ui.definition.table.table {
+                border: none;
+            }
+
+            #firstTh {
+                background-color: var(--bgColor);
+            }
+
+            /* SNS Buttons */
+
+            .sns-share-buttons-title {
+                display: flex;
+                text-align: left;
+            }
+
+            .sns-share-buttons {
+                width: 100%;
+                margin: 1em 0;
+                /* text-align: center; */
+                list-style: none;
+                padding-left: 0 !important;
+            }
+
+            .sns-share-buttons li {
+                display: inline-block;
+                width: 43px;
+                height: 43px;
+                margin: 3px;
+                padding: 0 !important;
+                border-radius: 25px;
+                vertical-align: middle;
+                line-height: 1em;
+            }
+
+            .sns-share-buttons li a {
+                font-size: 1.5em;
+                display: block;
+                padding-top: 10px;
+                text-align: center;
+                box-shadow: 2px 2px 8px -2px #aaa;
+                text-decoration: none;
+                color: #fff !important;
+                border-radius: 25px;
+                height: 43px;
+                /*Change to 33 px if vertical outside QooQ*/
+                transition: .3s;
+            }
+
+            .sns-share-buttons li a:hover {
+                text-decoration: none !important;
+                transform: translateY(-3px);
+                cursor: pointer;
+            }
+
+            .amazon {
+                margin: 3rem 0 0rem 0;
+                /* display: grid; */
+                /* place-items: center; */
+            }
+
+            #amazon_btn {
+                width: 43px;
+                height: 43px;
+                font-size: 1.5em;
+                display: block;
+                padding-top: 11px;
+                text-align: center;
+                box-shadow: 2px 2px 8px -2px #aaa;
+                text-decoration: none;
+                color: #000000 !important;
+                border-radius: 25px;
+                transition: .3s;
+                background: rgb(255, 208, 0)
+            }
+
+            #amazon_btn:hover {
+                text-decoration: none !important;
+                transform: translateY(-3px);
+                cursor: pointer;
+            }
+
+            .sns-share-buttons .tweet a {
+                background: rgb(0, 0, 0);
+            }
+
+            .sns-share-buttons .facebook a {
+                background: royalblue;
+            }
+
+            .sns-share-buttons .hatena a {
+                background: dodgerblue;
+            }
+
+            .sns-share-buttons .pocket a {
+                background: coral;
+            }
+
+            .sns-share-buttons .line a {
+                background: limegreen;
+            }
+
+            .sns-share-buttons .pinterest a {
+                background: tomato;
+            }
+
+            .sns-share-buttons .copylink a {
+                font-family: arial;
+                background: plum;
+                font-size: 8px;
+                color: #333 !important;
+            }
+
+            .copylink a::before {
+                font-family: "Font Awesome 5 Free";
+                content: "\f0ea" "\A";
+                font-weight: 900;
+                font-size: 22px;
+                line-height: 1em;
+                color: #fff !important;
+            }
+
+            .sns-share-buttons-title {
+                margin: 2em auto 1em;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .tableTitle {
+                margin-bottom: 3rem;
+            }
+
+            #rand {
+                font-size: 0.1px;
+            }
+
+            /* .hidden-text {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            } */
+        </style>
+        <script src="javascripts/ResultsTable.js"></script>
+    </head>
+    <h1 class="ui header grid">
+        Results
+    </h1>
+    <div class="ui segment no-border">
+        <div class="upper">
+            <div>
+                <h2 class="fitMsg">
+                    <%= mouses[0].creator %>
+                        <%= mouses[0].name %> may fit your hand!
+                </h2>
+                <table class="ui definition table celled" id="upperTable">
+                    <thead>
+                        <tr>
+                            <th id="firstTh"></th>
+                            <th>Length(mm)</th>
+                            <th>Width(mm)</th>
+                            <% if(!isNaN(desiZ)){ %>
+                            <th>Height(mm)</th>
+                            <% } %>
+                            <th>Total Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Disired</td>
+                            <td>
+                                <%= desiY %>
+                            </td>
+                            <td>
+                                <%= desiX %>
+                            </td>
+                            <% if(!isNaN(desiZ)){ %>
+                            <td>
+                                <%= desiZ %>
+                            </td>
+                            <% } %>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td><%= mouses[0].name %></td>
+                            <td>
+                                <%= mouses[0].length %>
+                            </td>
+                            <td>
+                                <%= mouses[0].width %>
+                            </td>
+                            <% if(!isNaN(desiZ)){ %>
+                            <td>
+                                <%= mouses[0].height %>
+                            </td>
+                            <% } %>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>Difference</td>
+                            <td style=<%=mouses[0].difY>= 0 ? 'color:#f95959' : 'color:#22b2da' %>;>
+                                <%= mouses[0].difY>= 0 ? '+' + mouses[0].difY : mouses[0].difY %>
+                            </td>
+                            <td style=<%=mouses[0].difX>= 0 ? 'color:#f95959' : 'color:#22b2da' %>;>
+                                <%= mouses[0].difX>= 0 ? '+' + mouses[0].difX : mouses[0].difX %>
+                            </td>
+                            <% if(!isNaN(desiZ)){ %>
+                             <td style=<%=mouses[0].difZ>= 0 ? 'color:#f95959' : 'color:#22b2da' %>;>
+                                <%= mouses[0].difZ>= 0 ? '+' + mouses[0].difZ : mouses[0].difZ %>
+                            </td>
+                            <% } %>
+                            <td>
+                                <%= mouses[0].totalDif %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="leftBottom">
+                    <div id="lbLeft">
+                        <b:if cond='data:view.isPost'>
+                            <div class='sns-share-buttons-title'>Share the results!</div>
+                            <ul class='sns-share-buttons'>
+                                <!-- Twitter -->
+                                <li class='tweet'>
+                                    <a id='tweet_btn' onclick='popup1()' title='X'>
+                                        <i class="fa-brands fa-x-twitter"></i>
+                                    </a>
+                                </li>
+                                <!-- Facebook -->
+                                <li class='facebook'>
+                                    <a id='fb_btn' onclick='popup2()' title='Facebook'>
+                                        <i class='fab fa-facebook-f'></i>
+                                    </a>
+                                </li>
+                                <!-- Pocket -->
+                                <li class='pocket'>
+                                    <a id='pocket_btn' onclick='popup4()' title='Pocket'>
+                                        <i class='fab fa-get-pocket'></i>
+                                    </a>
+                                </li>
+                                <!-- LINE -->
+                                <li class='line'>
+                                    <a id='line_btn' onclick='popup5()' title='LINE'>
+                                        <i class='fab fa-line'></i>
+                                    </a>
+                                </li>
+                                <!-- Copy Link -->
+                                <li class='copylink'>
+                                    <a class='copy_btn' style='font-weight:bold;line-height:1em' title='Copy link'></a>
+                                </li>
+                            </ul>
+                        </b:if>
+                        <% if(mouses[0].amzn){ %>
+                            <div class="amazon">
+                            <h3>Amazon Product</h3>
+                            <a id='amazon_btn'  href=<%= mouses[0].amzn %> target="_blank" title='amazon'>
+                                <i class="fa-brands fa-amazon"></i>
+                            </a>
+                            </div>
+                        <%  } %>
+                    </div>
+                    <div id="lbRight">
+                        <div id="videos">
+                            <% if(items[0]){ %>
+                                <iframe width="426" height="240" class="videoSize"
+                                    src="https://www.youtube.com/embed/<%= items[0].id.videoId %>" frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
+                                <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- mouses[0].tweet %>
+        </div>
+        <div class="container  ui segment no-border">
+            <div class="tableTitle">
+                <h1>Table containing gaps</h1>
+            </div>
+            <table id="example" class="display nowrap ui striped" width="100%">
+                <thead>
+                    <tr class="grey">
+                        <th>Gap</th>
+                        <th>GapX</th>
+                        <th>GapY</th>
+                        <% if(!isNaN(desiZ)){ %>
+                            <th>GapZ</th>
+                            <% } %>
+                        <th>Creator</th>
+                        <th>Name</th>
+                        <th>Weight</th>
+                        <th>Length</th>
+                        <th>Width</th>
+                        <th>Height</th>
+                        <th>Shape</th>
+                        <th>Connection</th>
+                        <th>Sensor</th>
+                        <th>Polling Rate
+                            <i class="ui exclamation circle icon info-icon orange"
+                                data-content="The maximum polling rate that can be set. In particular, be aware that a WIRED connection or an OPTIONAL DONGLE may be required for higher frequencies."
+                                data-variation="large very wide"></i>
+                        </th>
+                        <th>DPI</th>
+                        <th>Surface</th>
+                        <th>Buttons
+                            <i class="ui info circle icon info-icon"
+                                data-content="Number of buttons excluding bottom. For multi-button mice, all button counts."
+                                data-variation="large very wide"></i>
+                        </th>
+                        <th>Main Switches</th>
+                        <th>Tracking Speed (IPS)
+                        </th>
+                        <th>Max Acceleration (G)
+                        </th>
+                        <th>Min LOD</th>
+                        <th>Max LOD</th>
+                        <th>Battery</th>
+                        <th>Roundness
+                            <i class="ui info circle icon info-icon"
+                            data-content="Number of buttons excluding bottom. For multi-button mice, all button counts."
+                            data-variation="large very wide"></i>
+                        </th>
+                        <th>Material</th>
+                        <th>Google</th>
+                        <th>Amazon</th>
+                        <th>Youtube</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% mouses.forEach(m=> { %>
+                        <tr>
+                            <td>
+                                <%= m.totalDif %>
+                            </td>
+                            <td style=<%=m.difX>= 0 ? 'color:#f95959' : 'color:#22b2da' %>;>
+                                <%= m.difX>= 0 ? '+' + m.difX : m.difX %>
+                            </td>
+                            <td style=<%=m.difY>= 0 ? 'color:#f95959' : 'color:#22b2da' %>;>
+                                <%= m.difY>= 0 ? '+' + m.difY : m.difY %>
+                            </td>
+                            <% if(!isNaN(desiZ)){ %>
+                            <td style=<%=m.difZ>= 0 ? 'color:#f95959' : 'color:#22b2da' %>;>
+                                <%= m.difZ>= 0 ? '+' + m.difZ : m.difZ %>
+                            </td>
+                            <% } %>
+                            <td>
+                                <%= m.creator %>
+                            </td>
+                            <td>
+                                <%= m.name %>
+                            </td>
+                            <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                                onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                                <%= m.weight %>
+                            </td>
+                            <td>
+                                <%= m.length %>
+                            </td>
+                            <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                                onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                                <%= m.width %>
+                            </td>
+                            <td>
+                                <%= m.height %>
+                            </td>
+                            <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                                onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                                <%= m.shape %>
+                            </td>
+                            <td>
+                                <%= m.connection %>
+                            </td>
+                            <td>
+                                <%= m.sensor %>
+                            </td>
+                            <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                                onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                                <%= m.pollRate %>
+                            </td>
+                            <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                                onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                                <%= m.dpi %>
+                            </td>
+                            <td>
+                                <%= m.surface %>
+                            </td>
+                            <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                                onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                                <%= m.btnNum %>
+                            </td>
+                            <td class="<%= m.mainSw ? '' : 'empty' %>">
+                                <%= m.mainSw %>
+                            </td>
+                            <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                                onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                                <%= m.trackSpd %>
+                            </td>
+                            <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                                onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                                <%= m.accel %>
+                            </td>
+                            <td>
+                                <%= m.minLod %>
+                            </td>
+                            <td>
+                                <%= m.maxLod %>
+                            </td>
+                            <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                                onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                                <%= m.battery %>
+                            </td>
+                            <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                                onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                                <%= m.isRound ? 'Yes' : 'No' %>
+                            </td>
+                            <td>
+                                <%= m.material %>
+                            </td>
+                            <td><span style="display: none;">hidden exists</span><i class="fab fa-google"
+                                    onclick="openLink('https://www.google.com/search?q=<%= m.creator %>+<%= m.name %>')"></i>
+                            </td>
+                            <% if(m.amzn){ %>
+                                <td><span style="display: none;">hidden exists</span><i class="fab fa-amazon"
+                                        onclick="openLink('<%= m.amzn %>')"></i></td>
+                            <% }else{ %>
+                                <td></td>
+                            <% } %>
+                            <td><span style="display: none;">hidden exists</span><i class="fab fa-youtube"
+                                    onclick="openLink('https://www.youtube.com/results?search_query=<%= m.creator %>+<%= m.name %>')"></i>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function popup1() {
+            var w = 550, h = 550;
+            window.open("https://twitter.com/intent/tweet?url=" + encodeURIComponent(location.href) + "&text=" + "<%= mouses[0].creator %> <%= mouses[0].name %> is the mouse fits my hand!");
+        }
+
+        function popup2() {
+            var w = 550, h = 420;
+            window.open("https://www.facebook.com/sharer.php?u=" + encodeURIComponent(location.href));
+        }
+
+        function popup4() {
+            var w = 550, h = 420;
+            window.open("https://getpocket.com/edit?url=" + encodeURIComponent(location.href));
+        }
+
+        function popup5() {
+            var w = 550, h = 420;
+            window.open("https://social-plugins.line.me/lineit/share?url=" + encodeURIComponent(location.href));
+        }
+
+        //amazon
+        // function popup9() {
+        //     var w = 550, h = 420;
+        //     window.open();
+        // }
+    </script>
+
+    <!-- Clipboard.js -->
+    <script src='//cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js'></script>
+
+    <% if(darkMode) { %>
+        <script src="javascripts/darkModeSession.js"></script>
+        <% } %>
+
+            <script>
+                // coppying
+                const clipboard = new ClipboardJS(".copy_btn");
+                window.addEventListener('DOMContentLoaded', function () {
+                    $(".copy_btn").click(function () {
+                        $(this).attr("data-clipboard-text", document.title + " " + location.href).css("cursor", "text").css("transform", "none").text("COPIED").attr("title", "コピーしました");
+                    });
+                    // const tweet = document.querySelectorAll('.twitter-tweet');
+                    // tweet.setAttribute('data-width', "300");
+                });
+            </script>
+
+            <!-- <% if(Math.random()<0.5){ %>
+            <div style="  position: absolute; top: -9999px;left: -9999px;">.<%= Math.trunc(Math.random() * 100) %>
+            </div>
+            <% } %> -->

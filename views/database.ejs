@@ -1,0 +1,171 @@
+<%- layout('layouts/common.ejs') %>
+
+    <head>
+        <title>Database - MouseDB</title>
+        <style>
+            .ui.header.grid {
+                margin-bottom: 4rem;
+            }
+
+            .ui.warning.message {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: fit-content;
+                margin: auto auto 1em auto;
+            }
+        </style>
+        <script src="javascripts/DBTable.js"></script>
+    </head>
+    <h1 class="ui header grid">
+        Mouse Database
+        <div class="sub header" style=" font-size: medium;">
+            Specifications of High-End / Gaming Mice
+        </div>
+    </h1>
+
+    <div class="ui warning message compact big">
+        <p>We're basically only listing new mice right now. Please wait for the timeless ones to be added</p>
+    </div>
+
+    <div class="container ui segment no-border">
+        <table id="example" class="ui display nowrap striped" width="100%">
+            <thead>
+                <tr class="grey">
+                    <th>Creator</th>
+                    <th>Name</th>
+                    <th>Weight</th>
+                    <th>Length</th>
+                    <th>Width</th>
+                    <th>Height</th>
+                    <th>Shape</th>
+                    <th>Connection</th>
+                    <th>Sensor</th>
+                    <th>Polling Rate
+                        <i class="ui exclamation circle icon info-icon orange"
+                            data-content="The maximum polling rate that can be set. In particular, be aware that a WIRED connection or an OPTIONAL DONGLE may be required for higher frequencies."
+                            data-variation="large very wide"></i>
+                    </th>
+                    <th>DPI</th>
+                    <th>Surface</th>
+                    <th>Buttons
+                        <i class="ui info circle icon info-icon"
+                            data-content="Number of buttons excluding bottom. For multi-button mice, all button counts."
+                            data-variation="large very wide"></i>
+                    </th>
+                    <th>Main Switches</th>
+                    <th>Tracking Speed (IPS)
+                    </th>
+                    <th>Max Acceleration (G)
+                    </th>
+                    <th>Min LOD</th>
+                    <th>Max LOD</th>
+                    <th>Battery</th>
+                    <th>Roundness
+                        <i class="ui info circle icon info-icon"
+                            data-content="This is based on our senses. Rounded mouse = Yes, Angular mouse = No"
+                            data-variation="large very wide"></i>
+                    </th>
+                    <th>Material</th>
+                    <th>Google</th>
+                    <th>Amazon</th>
+                    <th>Youtube</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% mouses.forEach(m=> { %>
+                    <tr>
+                        <td>
+                            <%= m.creator %>
+                        </td>
+                        <td>
+                            <%= m.name %>
+                        </td>
+                        <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                            onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                            <%= m.weight %>
+                        </td>
+                        <td>
+                            <%= m.length %>
+                        </td>
+                        <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                            onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                            <%= m.width %>
+                        </td>
+                        <td>
+                            <%= m.height %>
+                        </td>
+                        <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                            onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                            <%= m.shape %>
+                        </td>
+                        <td>
+                            <%= m.connection %>
+                        </td>
+                        <td>
+                            <%= m.sensor %>
+                        </td>
+                        <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                            onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                            <%= m.pollRate %>
+                        </td>
+                        <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                            onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                            <%= m.dpi %>
+                        </td>
+                        <td>
+                            <%= m.surface %>
+                        </td>
+                        <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                            onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                            <%= m.btnNum %>
+                        </td>
+                        <td class="<%= m.mainSw ? '' : 'empty' %>">
+                            <%= m.mainSw %>
+                        </td>
+                        <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                            onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                            <%= m.trackSpd %>
+                        </td>
+                        <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                            onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                            <%= m.accel %>
+                        </td>
+                        <td>
+                            <%= m.minLod %>
+                        </td>
+                        <td>
+                            <%= m.maxLod %>
+                        </td>
+                        <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                            onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                            <%= m.battery %>
+                        </td>
+                        <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                            onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
+                            <%= m.isRound ? 'Yes' : 'No' %>
+                        </td>
+                        <td>
+                            <%= m.material %>
+                        </td>
+                        <td><span style="display: none;">hidden exists</span><i class="fab fa-google"
+                                onclick="openLink('https://www.google.com/search?q=<%= m.creator %>+<%= m.name %>')"></i>
+                        </td>
+                        <% if(m.amzn){ %>
+                            <td><span style="display: none;">hidden exists</span><i class="fab fa-amazon"
+                                    onclick="openLink('<%= m.amzn %>')"></i></td>
+                            <% }else{ %>
+                                <td></td>
+                                <% } %>
+                                    <td><span style="display: none;">hidden exists</span><i class="fab fa-youtube"
+                                            onclick="openLink('https://www.youtube.com/results?search_query=<%= m.creator %>+<%= m.name %>')"></i>
+                                    </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <% if(darkMode) { %>
+        <script src="javascripts/darkModeSession.js"></script>
+        <% } %>

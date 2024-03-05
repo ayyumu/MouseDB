@@ -1,0 +1,170 @@
+; ネトリファイ done 
+; データ複数追加
+
+; ドメイン取得 done
+; デプロイ
+
+; datatableの初期colviz
+; データがなかったら表示させない 
+; コピー禁止 done
+mongo storeのsecure
+edito用ルートのオフ
+; favicon.ico ➡ 404が残るかどうか
+全てのlink relやconsole.logを隠す
+(アニメーション
+レスポンシブの改善)
+-------------------------
+
+|l-0.6hl|+|w-0.6hw|と(l-0.6hl)+(w-0.6hw)が小さい順に表に追加する。mouseをハイライト表示 l+wは表に表示
+(Mongooseでそれぞれのオブジェクトがxとyの値を持っているときに、|x-1|+|y-1|と(x-1)+(y-1)それぞれがともに小さい順に並べる方法。ただし(x-1)+(y-1)が
+小さいことを優先する。)
+
+paneをつくる
+buttons https://datatables.net/extensions/buttons/
+age filter https://datatables.net/forums/discussion/comment/198045/#Comment_198045
+multi filters https://datatables.net/forums/discussion/comment/210607/#Comment_210607
+jquery slider https://jqueryui.com/slider/#range, https://www.cssscript.com/custom-range-slider-input/, example: https://stackoverflow.com/questions/44212075/jquery-datatables-with-two-range-slider-filters
+advanced filters https://live.datatables.net/mabaxehe/1/edit, https://live.datatables.net/mabaxehe/68/edit
+With Buttons - Column visibility
+
+top layout: https://datatables.net/forums/discussion/78188
+filtering for each columns https://datatables.net/forums/discussion/comment/165582/#Comment_165582 
+datatables https://legacy.datatables.net/usage/features
+codepen
+
+dark mode
+$(document).ready(function(){
+        $("*").addClass("ui inverted");
+      $("#toggle").click(function(){
+        $("*").toggleClass("inverted");
+      });
+    });
+
+result table 4x5
+<table class="ui definition table">
+                    <thead>
+                        <tr>
+                            <th id="firstTh"></th>
+                            <th>Desired</th>
+                            <th>
+                                <%= mouses[0].name %>
+                            </th>
+                            <th>Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Length(mm)</td>
+                            <td>
+                                <%= desiY %>
+                            </td>
+                            <td>
+                                <%= mouses[0].length %>
+                            </td>
+                            <td style=<%=mouses[0].difY>= 0 ? 'color:#f95959' : 'color:#22b2da' %>;>
+                                <%= mouses[0].difY>= 0 ? '+' + mouses[0].difY : mouses[0].difY %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Width(mm)</td>
+                            <td>
+                                <%= desiX %>
+                            </td>
+                            <td>
+                                <%= mouses[0].width %>
+                            </td>
+                            <td style=<%=mouses[0].difX>= 0 ? 'color:#f95959' : 'color:#22b2da' %>;>
+                                <%= mouses[0].difX>= 0 ? '+' + mouses[0].difX : mouses[0].difX %>
+                            </td>
+                        </tr>
+                        <% if(desiZ){ %>
+                            <tr>
+                                <td>Height(mm)</td>
+                                <td>
+                                    <%= desiZ %>
+                                </td>
+                                <td>
+                                    <%= mouses[0].height %>
+                                </td>
+                                <td style=<%=mouses[0].difZ>= 0 ? 'color:#f95959' : 'color:#22b2da' %>;>
+                                    <%= mouses[0].difZ>= 0 ? '+' + mouses[0].difZ : mouses[0].difZ %>
+                                </td>
+                            </tr>
+                        <% } %>
+                            <tr>
+                                <td>Total Difference</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>
+                                    <%= mouses[0].totalDif %>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+
+                <i class="ui info circle icon info-icon"
+                            data-content="The maximum movement speed that the mouse can detect. IPS (I/S) is like KM/H or MPH, which are common speed units. If the mouse is rated at 100 IPS, moving the mouse at a speed of 200 IPS will cause the mouse to move faster and not track."
+                            data-variation="large very wide"></i>
+<i class="ui info circle icon info-icon"
+                        data-content="The maximum acceleration that the mouse can detect. 1G is the acceleration of gravity."
+                        data-variation="large very wide"></i>
+
+
+
+ // 要素を取得
+    const selectedTable = document.querySelector('#example');
+    
+    // クリックが開始された時間
+    let startTime;
+
+    // クリックされたときのイベントリスナー
+    document.addEventListener('mousedown', function(event) {
+        // クリックが開始された時間を記録
+        startTime = Date.now();
+
+        // 一定時間後に選択を無効化する関数を実行
+        setTimeout(disableUserSelect, 1000);
+    });
+
+    // クリックが終了したときのイベントリスナー
+    document.addEventListener('mouseup', function(event) {
+        // クリックが終了した時刻を記録
+        const endTime = Date.now();
+
+        // クリックが一定時間未満で終了した場合は、選択を無効化するタイマーをクリア
+        if (endTime - startTime < 1000) {
+            clearTimeout(disableUserSelect);
+        }
+    });
+
+    // 一定時間後に選択を無効化する関数
+    function disableUserSelect() {
+        selectedTable.classList.add('no-select');
+        setTimeout(enableUserSelect, 1000);
+        // selectedTable.classList.remove('no-select');
+        // selectedTable.classList.add('no-select-unlocked');
+        // selectedTable.classList.remove('no-select-unlocked');
+        console.log('If you want the table data, just contact me');
+    }
+    function enableUserSelect() {
+        selectedTable.classList.remove('no-select');
+        selectedTable.classList.add('no-select-unlocked');
+        // selectedTable.classList.remove('no-select-unlocked');
+        console.log('If you want the table data, just contact me');
+    }
+
+    <td>
+                            <%= m.keyRes %>
+                        </td>
+<td>
+                            <%= m.led %>
+                        </td>
+                        <td>
+                            <%= m.date %>
+                        </td>
+<td>
+                            <%= m.country %>
+                        </td>
+                        <td>
+                            <%= m.color %>
+                        </td>

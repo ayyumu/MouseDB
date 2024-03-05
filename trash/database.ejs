@@ -1,0 +1,54 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" />
+    <!-- <link rel="stylesheet" href="/css/sort.css"> -->
+
+</head>
+
+<body>
+    <h1>Items</h1>
+    <table id="sortable-table" class="ui sortable celled inverted blue table striped">
+        <thead>
+            <tr>
+                <th class="two wide sorted ascending">Name</th>
+                <th class="two wide sorted ascending">Category</th>
+                <th class="two wide sorted ascending">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% mouses.forEach(m=> { %>
+                <tr>
+                    <td>
+                        <%= m.creator %>
+                    </td>
+                    <td>
+                        <%= m.name %>
+                    </td>
+                    <td>
+                        <%= m.weight %>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include tablesort plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $('table').tablesort()
+    });
+    </script>
+    <script src="/javascripts/sort.js"></script>
+
+</body>
+
+</html>

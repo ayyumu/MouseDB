@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= category %>商品一覧</title>
+</head>
+<body>
+    <h1><%= category %>商品一覧</h1>
+    <ul>
+        <%  for(let m of mouses){ %>
+            <li><a href="/mouses/<%= m.creator %>/<%= m.name %>"> <%= m.creator %> <%= m.name %> </a></li>
+        <% } %>
+    </ul>
+    <a href="/mouses/new">add new item</a>
+    <% if(category !== '全'){ %>
+        <a href="/mouses">全商品一覧へ</a>
+    <% } %>
+    
+</body>
+</html>
