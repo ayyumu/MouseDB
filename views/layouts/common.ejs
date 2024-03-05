@@ -227,8 +227,8 @@
         <a class="item" href="/Contact">
             Report & Contact
         </a>
-        <a class="right item moon" id="toggle" style="margin: auto 1rem auto 1rem;">
-            <i class="fa fa-moon"></i>
+        <a class="right item" id="toggle" style="margin: auto 1rem auto 1rem;">
+            <i class="fa <%= darkMode ? 'fa-sun' : 'fa-moon' %>"></i>
         </a>
     </div>
 
@@ -259,6 +259,11 @@
                     $("body, #firstTh").toggleClass("bBack");
                     $("img").not(".infoData").toggleClass("invImg");
                     $(".dtsb-searchBuilder").toggleClass("invFilter");
+                    if ($(this).find("i").hasClass("fa-moon")) {
+                        $(this).find("i").removeClass("fa-moon").addClass("fa-sun");
+                    } else if ($(this).find("i").hasClass("fa-sun")) {
+                        $(this).find("i").removeClass("fa-sun").addClass("fa-moon");
+                    }
                     fetch('/dark-mode-toggle', { method: 'POST' })
                         .then(response => {
                             if (response.ok) {
@@ -309,6 +314,9 @@
                 window.open(url, '_blank');
             }
         </script>
+        <% if(darkMode) { %>
+            <script src="javascripts/darkModeSession.js"></script>
+            <% } %>
 </body>
 
 </html>
