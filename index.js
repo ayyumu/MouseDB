@@ -210,7 +210,8 @@ app.all('*', (req, res, next) => {
 app.use((err, req, res, next) => {
     const { condition = 500 } = err;
     console.log('err.messageは', err.message);
-    res.status(condition).render('error', { err });
+    const darkMode = req.session.darkMode || false;
+    res.status(condition).render('error', { err, darkMode });
 });
 
 app.listen(80, () => {
