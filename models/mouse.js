@@ -34,7 +34,7 @@ const mouseSchema = new mongoose.Schema({
     keyRes: Number,
     minLod: Number,
     maxLod: Number,
-    battery: String,
+    battery: Number, //buggy when combining string
     
     isRound: Boolean,
     led: Boolean,
