@@ -139,7 +139,8 @@ async function videoSearch(search1, search2, maxResults) {
 
 // app.get('/editor', wrapAsync(async function (req, res) {
 //     const mouses = await Mouse.find();
-//     res.render('editor', { mouses });
+//     const darkMode = req.session.darkMode || false;
+//     res.render('editor', { mouses, darkMode });
 // }));
 
 // app.get('/mouses/new', (req, res) => {

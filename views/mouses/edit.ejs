@@ -112,7 +112,7 @@
 
         <br>
         <label for="battery">battery</label>
-        <input type="number" name="battery" placeholder="battery" value="<%= mouse.battery %>">
+        <input type="text" name="battery" placeholder="battery" value="<%= mouse.battery %>">
 
         <br>
         <label for="date">date</label>
@@ -122,7 +122,7 @@
 
         <br>
         <label for="country">country</label>
-        <input type="text" name="country" placeholder="country">
+        <input type="text" name="country" placeholder="country" value="<%= mouse.country %>">
         <div id="colorContainer">
             <label for="color">color:</label>
             <% for(let c of mouse.color){ %>
