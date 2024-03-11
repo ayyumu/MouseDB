@@ -142,7 +142,7 @@
                         <td>
                             <%= m.maxLod %>
                         </td>
-                        <td style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
+                        <td  class="<%= m.battery ? '' : 'empty' %>" style="-webkit-user-select: none; -khtml-user-select: none; -ms-user-select: none; -moz-user-select: none; user-select: none;"
                             onselectstart="alert('This value is set uncopyable. If you want the table data, just contact me'); return false;">
                             <%= m.battery %>
                         </td>
