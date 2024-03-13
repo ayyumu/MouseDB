@@ -204,7 +204,7 @@ async function videoSearch(search1, search2, maxResults) {
 // })
 //---------------------------------------------------------------------------------
 app.all('*', (req, res, next) => {
-    next(new AppError('Page not found. What!? Where are you trying to go!?', 404));
+    next(new AppError('404 Page not found. What!? Where are you trying to go!?', 404));
 });
 
 app.use((err, req, res, next) => {
