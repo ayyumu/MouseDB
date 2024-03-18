@@ -9,7 +9,7 @@ $(document).ready(function () {
         },
         language: {
             searchBuilder: {
-                title: 'Filter',
+                title: 'Filters',
             }
         },
         buttons: ['colvis'],
