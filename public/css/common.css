@@ -58,7 +58,7 @@
 
  @font-face {
      font-family: "logo";
-     src: url("../fonts/PlusJakartaSans-Medium.ttf") format("truetype");
+     src: url("../fonts/PlusJakartaSans-Bold.ttf") format("truetype");
  }
 
  .ui.secondary.menu {
@@ -72,7 +72,7 @@
  }
 
  .ui.secondary.menu .item.logo {
-     padding: 0.2em 0.5em 0.2em 0.5em;
+     padding: 0.1em 0.5em 0.1em 0.5em;
      /* margin-top: -0.1em; */
      font-size: 3em;
      font-family: "logo", sans-serif;
